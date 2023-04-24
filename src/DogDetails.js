@@ -12,7 +12,7 @@ function DogDetails({dogs}) {
       <p className="DogDetails-age">Age: {dog.age}</p>
       Facts:
       <ul className="DogDetails-facts">
-        {dog.facts.map(fact => <li>{fact}</li>)}
+        {dog.facts.map(fact => <li key={fact}>{fact}</li>)}
       </ul>
     </div>
   );
