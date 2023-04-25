@@ -1,9 +1,21 @@
 import "./App.css";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import DogDetails from "./DogDetails";
 import DogList from "./DogList";
-import { useEffect, useState } from "react";
+import Nav from "./Nav";
+import { useState } from "react";
 import axios from "axios";
+
+/** App for finding dogs.
+ *
+ * State:
+ * -dogs: data collected from dogs API like [{dog}, ...]
+ * -isLoading: Boolean (initial: true)
+ *
+ * Depending on path, show different components.
+ *
+ * App -> {Nav, Routes}
+ */
 
 
 function App() {
@@ -16,7 +28,6 @@ function App() {
 		setIsLoading(false);
 	}
 
-
 	if (isLoading) {
 		getDogs();
 		return <p>Who let the dogs out?</p>;
@@ -26,10 +37,11 @@ function App() {
     <div className="App">
       <h1>Dog Finder!</h1>
       <BrowserRouter>
-        {/* <Nav /> */}
+        <Nav dogs={dogs}/>
         <Routes>
           <Route path="/dogs" element={<DogList dogs={dogs} />} />
           <Route path="/dogs/:name" element={<DogDetails dogs={dogs} />} />
+          <Route path="*" element={<Navigate to="/dogs" />} />
         </Routes>
       </BrowserRouter>
     </div>
