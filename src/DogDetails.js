@@ -10,16 +10,11 @@ import "./DogDetails.css"
  * App -> Routes -> DogDetails
  */
 
-function DogDetails({dogs}) {
-  const {name} = useParams();
-
-  //TODO: could use find
-  const dog = dogs.filter(dog => dog.name === name)[0];
+function DogDetails({dog}) {
 
   if (!dog) {
     return <Navigate to="/dogs" />
   }
-
   return (
     <div className="DogDetails">
       <h2 className="DogDetails-name">{dog.name}</h2>
